@@ -1,0 +1,6 @@
+Menu (<%= MenuItem.all.size %>)
+<br />
+<% MenuItem.all.each do |item| %>
+  <%= item.name %> $<%= item.price %>
+  <br />
+<% end %>

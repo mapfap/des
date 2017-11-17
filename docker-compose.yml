@@ -1,13 +1,22 @@
 version: '3'
+volumes:
+  postgres-data:
+    driver: local
 services:
   db:
     image: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - ./tmp/pg:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: 0x0mpv0
   web:
     build: .
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
-    volumes:
-      - .:/myapp
     ports:
       - "3000:3000"
+    volumes:
+      - .:/myapp
     depends_on:
       - db
